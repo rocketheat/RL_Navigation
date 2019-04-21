@@ -1,6 +1,8 @@
 # RL_Navigation
 Udacity Reinforcement Learning Navigation Project Using Deep Q-Learning
 
+![Agent](./play.gif)
+
 Reinforcement Learning environement:
 
 The enviornment provides the following states regarding

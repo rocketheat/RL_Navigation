@@ -34,7 +34,7 @@ state_size = len(state)
 # Training hyperparameters
 N_EPISODES=10
 MAX_T=1000
-EPS_START=1.0
+EPS_START=0.0
 EPS_END=0.01
 EPS_DECAY=0.995
 
@@ -99,21 +99,22 @@ def dqn(n_episodes=N_EPISODES, max_t=MAX_T, eps_start=EPS_START, eps_end=EPS_END
             state = next_state
             score += reward
 
-            sleep(0.01) # Time in seconds.
+            sleep(0.03) # Time in seconds.
 
             if done:
                 break
 
         scores_window.append(score)       # save most recent score
         scores.append(score)              # save most recent score
-        eps = max(eps_end, eps_decay*eps) # decrease epsilon
+        # eps = max(eps_end, eps_decay*eps) # decrease epsilon
+
         print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_window)), end="")
-        if i_episode % 100 == 0:
+        if i_episode % 1 == 0:
             print('\rEpisode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_window)))
-        if np.mean(scores_window)>=Target_Reward:
-            print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode-100, np.mean(scores_window)))
-            torch.save(agent.qnetwork_local.state_dict(), 'model.pth')
-            break
+        # if np.mean(scores_window)>=Target_Reward:
+        #     print('\nEnvironment solved in {:d} episodes!\tAverage Score: {:.2f}'.format(i_episode-100, np.mean(scores_window)))
+        #     torch.save(agent.qnetwork_local.state_dict(), 'model.pth')
+        #     break
     return scores
 
 scores = dqn()
