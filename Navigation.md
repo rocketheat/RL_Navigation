@@ -136,7 +136,8 @@ agent = Agent(
     lr=LR,
     update_every=UPDATE_EVERY)
 
-def dqn(n_episodes=N_EPISODES, max_t=MAX_T, eps_start=EPS_START, eps_end=EPS_END, eps_decay=EPS_DECAY):
+def dqn(n_episodes=N_EPISODES, max_t=MAX_T, eps_start=EPS_START, eps_end=EPS_END, eps_decay=EPS_DECAY,\
+        train=True):
     """Deep Q-Learning.
 
     Params
@@ -161,7 +162,8 @@ def dqn(n_episodes=N_EPISODES, max_t=MAX_T, eps_start=EPS_START, eps_end=EPS_END
             reward = env_info.rewards[0] # get the reward
             done = env_info.local_done[0] # see if episode has finished
 
-            agent.step(state, action, reward, next_state, done)
+            if train:
+                agent.step(state, action, reward, next_state, done)
 
             state = next_state
             score += reward
@@ -203,7 +205,7 @@ fig.savefig('model.png')
 
 
 
-![png](model.png)
+![png](model_500.png)
 
 
 
